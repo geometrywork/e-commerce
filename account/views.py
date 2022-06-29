@@ -18,7 +18,7 @@ from .tokens import account_activation_token
 def dashboard(request):
     orders = user_orders(request)
     return render(request,
-                  'account/user/dashboard.html',
+                  'account/dashboard/dashboard.html',
                   {'section': 'profile', 'orders': orders})
 
 
@@ -33,7 +33,7 @@ def edit_details(request):
         user_form = UserEditForm(instance=request.user)
 
     return render(request,
-                  'account/user/edit_details.html', {'user_form': user_form})
+                  'account/dashboard/edit_details.html', {'user_form': user_form})
 
 
 @login_required
@@ -60,17 +60,17 @@ def account_register(request):
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate your Account'
-            message = render_to_string('account/registration/account_activation_email.html', {
-                'user': user,
+            message = render_to_string('account/password_reset/account_activation_email.html', {
+                'password_reset': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
-            return HttpResponse('registered succesfully and activation sent')
+            return render(request, 'account/password_reset/register_email_confirm.html', {'form': registerForm})
     else:
         registerForm = RegistrationForm()
-    return render(request, 'account/registration/register.html', {'form': registerForm})
+    return render(request, 'account/password_reset/register.html', {'form': registerForm})
 
 
 def account_activate(request, uidb64, token):
@@ -85,4 +85,4 @@ def account_activate(request, uidb64, token):
         login(request, user)
         return redirect('account:dashboard')
     else:
-        return render(request, 'account/registration/activation_invalid.html')
+        return render(request, 'account/password_reset/activation_invalid.html')
