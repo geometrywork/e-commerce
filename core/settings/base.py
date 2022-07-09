@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'django-insecure-nalzr%n&@tzs4ye#1*bx9htl2^hbd=#cq6@_y^k03ncl$f8@)*'
 
@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'account',
     'payment',
     'orders',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -107,7 +108,7 @@ BASKET_SESSION_ID = 'basket'
 
 
 # Custom password_reset model
-AUTH_USER_MODEL = 'account.UserBase'
+AUTH_USER_MODEL = 'account.Customer'
 LOGIN_REDIRECT_URL = '/account/dashboard'
 LOGIN_URL = '/account/login/'
 
