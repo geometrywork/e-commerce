@@ -27,11 +27,14 @@
           <div class="col">
             <div class="card border-0">
               {% for image in product.product_image.all %}
-              {% if image.is_feature%}
-              <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
-                alt="{{ image.image.alt_text }}">
-              {% endif %}
-              {% endfor %}
+                {% if image.is_feature %}
+                <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ image.image.url }}"
+                  alt="{{ image.image.alt_text }}">
+                {% else %}
+                <img class="img-fluid d-block-inline pt-3" width="100px" alt="Responsive image"
+                  src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
+                {% endif %}
+                {% endfor %}
               <div class="card-body px-0">
                 <p class="card-text">
                   <a class="text-dark text-decoration-none"
