@@ -5,7 +5,8 @@ from django.views.generic import TemplateView
 from . import views
 from .forms import PwdResetConfirmForm, PwdResetForm, UserLoginForm
 
-
+# https://docs.djangoproject.com/en/3.1/topics/auth/default/
+# https://ccbv.co.uk/projects/Django/3.0/django.contrib.auth.views/PasswordResetConfirmView/
 
 app_name = "account"
 
@@ -62,4 +63,7 @@ urlpatterns = [
     path("addresses/edit/<slug:id>/", views.edit_address, name="edit_address"),
     path("addresses/delete/<slug:id>/", views.delete_address, name="delete_address"),
     path("addresses/set_default/<slug:id>/", views.set_default, name="set_default"),
+    # Wish List
+    path("wishlist", views.wishlist, name="wishlist"),
+    path("wishlist/add_to_wishlist/<int:id>", views.add_to_wishlist, name="user_wishlist"),
 ]
