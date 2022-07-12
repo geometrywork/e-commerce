@@ -44,7 +44,6 @@
             <div class="card-body p-1">
               <h1 class="mb-0 h2 pe-4 pb-4">{{ product.title }}</h1>
               <div class="bg-light">
-
                 {% for image in product.product_image.all %}
                 {% if image.is_feature %}
                 <img class="img-fluid mx-auto d-block" width="200px" alt="Responsive image" src="{{ image.image.url }}"
@@ -54,7 +53,6 @@
                   src="{{ image.image.url }}" alt="{{ image.image.alt_text }}">
                 {% endif %}
                 {% endfor %}
-
               </div>
             </div>
           </div>
